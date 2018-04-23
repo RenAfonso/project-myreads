@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import * as BooksAPI from './BooksAPI'
+import ListBooks from './ListBooks'
+import SearchBooks from './SearchBooks'
 import './App.css'
 
 BooksAPI.getAll().then(books => {console.log(books)})
 
-class BooksApp extends React.Component {
+class BooksApp extends Component {
     
     state = {
         books: []
+    }
+
+    componentDidMount() {
+        this.getBooks();
     }
 
     getBooks = () => {
@@ -27,6 +33,18 @@ class BooksApp extends React.Component {
 
 
     render() {
+        return (
+            <div className="app">
+                <Route exact path="/" render={() => (
+                    <ListBooks books={this.state.books} onChangeShelf={this.changeShelf} />
+                )}
+                />
+                <Route path="/search" render={({ history }) => (
+                    <SearchBooks books={this.state.books} onChangeShelf={this.changeShelf} />
+                )} />
+            </div>    
+        )
+
         /* return (
         <div className="app">
             {this.state.showSearchPage ? (
