@@ -8,6 +8,10 @@ class BookShelfChanger extends Component {
         shelf: ''
     }
 
+    componentDidMount() {
+        this.setState({ shelf: this.props.book.shelf });
+    }
+
     getNewShelf(shelf) {
         this.setState({ shelf: shelf });
         this.props.changeShelf( this.props.book, shelf );
