@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import ListBooks from './ListBooks'
 import SearchBooks from './SearchBooks'
 import './App.css'
 
-//BooksAPI.getAll().then(books => {console.log(books)})
+BooksAPI.getAll().then(books => {console.log(books)})
 
 class BooksApp extends Component {
     
