@@ -22,7 +22,7 @@ class ListBooks extends Component {
                             <div className="bookshelf" key={ index }>
                                 <h2 className="bookshelf-title">{ shelf.title }</h2>
                                 <div className="bookshelf-books">
-                                    <BookShelf books={ books.filter((book) => book.shelf === shelf.type) } changeShelf={ changeShelf } />
+                                    <BookShelf books={ books.filter((book) => (book.shelf === shelf.type)) } changeShelf={ changeShelf } />
                                 </div>
                             </div> )
                         }

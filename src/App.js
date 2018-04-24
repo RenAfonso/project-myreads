@@ -5,7 +5,7 @@ import ListBooks from './ListBooks'
 import SearchBooks from './SearchBooks'
 import './App.css'
 
-BooksAPI.getAll().then(books => {console.log(books)})
+//BooksAPI.getAll().then(books => {console.log(books)})
 
 class BooksApp extends Component {
     
