@@ -31,6 +31,12 @@ class BooksApp extends Component {
             })
     }
 
+    searchLibrary = (query) => {
+        BooksAPI.search(query)
+            .then((result) =>{
+                this.getBooks();
+            })
+    }
 
     render() {
         return (
