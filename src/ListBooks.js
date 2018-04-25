@@ -4,6 +4,11 @@ import BookShelf from './BookShelf'
 
 class ListBooks extends Component {
 
+    static propTypes = {
+        books: PropTypes.array.isRequired,
+        changeShelf: PropTypes.func.isRequired
+    }
+
     render() {
         
         const { books, changeShelf } = this.props;
@@ -34,11 +39,6 @@ class ListBooks extends Component {
             </div>
         )
     }
-}
-
-ListBooks.PropTypes ={
-    books: PropTypes.array.isRequired,
-    changeShelf: PropTypes.func.isRequired
 }
 
 export default ListBooks

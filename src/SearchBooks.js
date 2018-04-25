@@ -6,6 +6,11 @@ import Book from './Book'
 
 class SearchBooks extends Component {
 
+    static propTypes = {
+        books: PropTypes.array.isRequired,
+        changeShelf: PropTypes.func.isRequired
+    }
+
     state = {
         query: '',
         books: []
@@ -49,11 +54,6 @@ class SearchBooks extends Component {
             </div>
         )
     }
-}
-
-SearchBooks.PropTypes = {
-    books: PropTypes.array.isRequired,
-    changeShelf: PropTypes.func.isRequired
 }
 
 export default SearchBooks
