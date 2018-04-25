@@ -17,18 +17,32 @@ class SearchBooks extends Component {
         books: []
     }
 
-    //method to search books, as per lesson. On result, it maps the books array. Books with no shelf get displayed as well
+    //method to search books, as per lesson. On result, it maps the books array.
+    //less than three letters on search or search for an invalid word will set the books array to empty and remove all results from page
     updateQuery = (query) => {
         this.setState({ query: query.trim(), books: [] });
-        BooksAPI.search(query).then((result) => {
+        if (query.length > 2) {
+            BooksAPI.search(query).then((result) => {
+                if (result instanceof Array) {
+                    this.setState({
+                        books: result.map((book) => {
+                            let libraryBook = this.props.books.find((b) => (b.id === book.id));
+                            book.shelf = libraryBook ? libraryBook.shelf : 'none';
+                            return book;
+                        })
+                    });
+                } else {
+                    this.setState({
+                        books: []
+                    });
+                }
+                   
+            });
+        } else {
             this.setState({
-                books: result.map((book) => {
-                    let libraryBook = this.props.books.find((b) => (b.id === book.id));
-                    book.shelf = libraryBook ? libraryBook.shelf : 'none';
-                    return book;
-                })
-            });   
-        });
+                books: []
+            });
+        }   
     }
 
     render() {
