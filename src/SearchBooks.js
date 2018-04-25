@@ -1,20 +1,33 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types';
+import * as BooksAPI from './BooksAPI'
+import Book from './Book'
 
 class SearchBooks extends Component {
 
     state = {
         query: '',
-        booksList: []
+        books: []
     }
 
     updateQuery = (query) => {
-        this.setState({ query: query.trim() })
+        this.setState({ query: query.trim(), books: [] });
+        BooksAPI.search(query).then((result) => {
+            this.setState({
+                books: result.map((book) => {
+                    let searchedBook = this.props.books.find((b) => (b.id === book.id));
+                    book.shelf = searchedBook ? searchedBook.shelf : 'none';
+                    return book;
+                })
+            });   
+        });
     }
 
     render() {
 
-        const { books, changeShelf } = this.props;
+        const { changeShelf } = this.props;
+        const { query, books } = this.state;
 
         return(
             <div className="search-books">
@@ -26,7 +39,7 @@ class SearchBooks extends Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                    {booksList.map((book, index) => (
+                    {books.map((book, index) => (
                         <li key={ index }>
                             <Book book={ book } books={ books } changeShelf={ changeShelf } />
                         </li>
@@ -36,6 +49,11 @@ class SearchBooks extends Component {
             </div>
         )
     }
+}
+
+SearchBooks.PropTypes = {
+    books: PropTypes.array.isRequired,
+    changeShelf: PropTypes.func.isRequired
 }
 
 export default SearchBooks

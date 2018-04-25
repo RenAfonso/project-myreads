@@ -7,7 +7,7 @@ class BookShelf extends Component {
 
     render() {
 
-        const { book, books, changeShelf } = this.props;
+        const { books, changeShelf } = this.props;
 
         return(
             <ol className="books-grid">
@@ -21,8 +21,7 @@ class BookShelf extends Component {
     }
 }
 
-BookShelf.PropTypes ={
-    book: PropTypes.object.isRequired,
+BookShelf.PropTypes = {
     books: PropTypes.array.isRequired,
     changeShelf: PropTypes.func.isRequired
 }

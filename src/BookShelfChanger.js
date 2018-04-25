@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
 
 class BookShelfChanger extends Component {
 
@@ -19,8 +17,6 @@ class BookShelfChanger extends Component {
 
     render() {
         
-        const { book, changeShelf } = this.props;
-
         return(
             <div className="book-shelf-changer">
                 <select onChange={(e) => this.getNewShelf(e.target.value)} value={this.state.shelf}>
@@ -33,11 +29,6 @@ class BookShelfChanger extends Component {
             </div>
         )
     }
-}
-
-BookShelfChanger.PropTypes ={
-    book: PropTypes.object.isRequired,
-    changeShelf: PropTypes.func.isRequired
 }
 
 export default BookShelfChanger
