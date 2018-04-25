@@ -6,10 +6,12 @@ class BookShelfChanger extends Component {
         shelf: ''
     }
 
+    // sets state upon load
     componentDidMount() {
         this.setState({ shelf: this.props.book.shelf });
     }
 
+    // method to change shelf that call changeShelf props
     getNewShelf(shelf) {
         this.setState({ shelf: shelf });
         this.props.changeShelf( this.props.book, shelf );
@@ -17,6 +19,7 @@ class BookShelfChanger extends Component {
 
     render() {
         
+        // return creates the select list that, on change, calls the getNewShelf method
         return(
             <div className="book-shelf-changer">
                 <select onChange={(e) => this.getNewShelf(e.target.value)} value={this.state.shelf}>

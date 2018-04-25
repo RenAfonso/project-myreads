@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Book from './Book'
 
 
-class BookShelf extends Component {
+class BooksGrid extends Component {
 
     static propTypes = {
         books: PropTypes.array.isRequired,
@@ -14,6 +14,7 @@ class BookShelf extends Component {
 
         const { books, changeShelf } = this.props;
 
+        //return creates an ol node and maps the books array, creating an li element for each book, calling the Book component on each li element
         return(
             <ol className="books-grid">
                 {books.map((book, index) => (
@@ -26,4 +27,4 @@ class BookShelf extends Component {
     }
 }
 
-export default BookShelf
+export default BooksGrid

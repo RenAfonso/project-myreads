@@ -14,10 +14,11 @@ class Book extends Component {
 
         const { book, books, changeShelf } = this.props;
 
-        const bookCover = book.imageLinks && book.imageLinks.thumbnail ? book.imageLinks.thumbnail : 'no cover available';
-        const bookTitle = book.title ? book.title : 'title is missing';
-        const bookAuthor = book.authors ? book.authors.join(', ') : '';
+        const bookCover = book.imageLinks && book.imageLinks.thumbnail ? book.imageLinks.thumbnail : ''; //checks existing thumbnail
+        const bookTitle = book.title ? book.title : ''; //checks existing title
+        const bookAuthor = book.authors ? book.authors.join(', ') : ''; //separates multiple authors by ', '
 
+        // creates all elements for a book, including cover, title, author and component BookShelfChanger
         return(
             <div className="book">
                 <div className="book-top">
@@ -25,7 +26,7 @@ class Book extends Component {
                     <BookShelfChanger book={ book } books={ books } changeShelf={ changeShelf }/>
                 </div>
                 <div className="book-title">{bookTitle}</div>
-                <div className="book-authors">{bookAuthor}</div>
+                <div className="book-authors">{ bookAuthor}</div>
             </div>
         )
     }

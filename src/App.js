@@ -6,16 +6,20 @@ import ListBooks from './ListBooks'
 import SearchBooks from './SearchBooks'
 import './App.css'
 
+// NOTE: All components are named after the class of the first node displayed by such component, to better understand their placement
 class BooksApp extends Component {
     
+    // state stores books fetched from database
     state = {
         books: []
     }
 
+    // calls method to fetch books on load
     componentDidMount() {
         this.getBooks();
     }
 
+    // gets the books from database
     getBooks = () => {
         BooksAPI.getAll()
             .then(books => {
@@ -23,6 +27,7 @@ class BooksApp extends Component {
             })
     }
 
+    //method to assign a new shelf to a book
     changeShelf = (book, newShelf) => {
         BooksAPI.update(book, newShelf)
             .then((result) =>{
@@ -30,6 +35,7 @@ class BooksApp extends Component {
             })
     }
 
+    // render method with two components and one link: ListBooks displays shelves, Link opens search and SearchBooks does exactly what is says
     render() {
         return (
             <div className="app">

@@ -11,18 +11,20 @@ class SearchBooks extends Component {
         changeShelf: PropTypes.func.isRequired
     }
 
+    // state stores the query and the books array
     state = {
         query: '',
         books: []
     }
 
+    //method to search books, as per lesson. On result, it maps the books array. Books with no shelf get displayed as well
     updateQuery = (query) => {
         this.setState({ query: query.trim(), books: [] });
         BooksAPI.search(query).then((result) => {
             this.setState({
                 books: result.map((book) => {
-                    let searchedBook = this.props.books.find((b) => (b.id === book.id));
-                    book.shelf = searchedBook ? searchedBook.shelf : 'none';
+                    let libraryBook = this.props.books.find((b) => (b.id === book.id));
+                    book.shelf = libraryBook ? libraryBook.shelf : 'none';
                     return book;
                 })
             });   
@@ -34,6 +36,8 @@ class SearchBooks extends Component {
         const { changeShelf } = this.props;
         const { query, books } = this.state;
 
+        // return creates the search bar with a link (to return to app's root page) and calls the updateQuery method upon typing on search bar
+        // it also maps the books array and creates li element for each book, calling the Book component on each li element
         return(
             <div className="search-books">
                 <div className="search-books-bar">
