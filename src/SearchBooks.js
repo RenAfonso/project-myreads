@@ -24,13 +24,15 @@ class SearchBooks extends Component {
         if (query.length > 2) {
             BooksAPI.search(query).then((result) => {
                 if (result instanceof Array) {
-                    this.setState({
-                        books: result.map((book) => {
-                            let libraryBook = this.props.books.find((b) => (b.id === book.id));
-                            book.shelf = libraryBook ? libraryBook.shelf : 'none';
-                            return book;
-                        })
-                    });
+                    if(query === this.state.query)  { //to make sure no old queries are returned, due to a new promise being called before previous resolves
+                        this.setState({
+                            books: result.map((book) => {
+                                let libraryBook = this.props.books.find((b) => (b.id === book.id));
+                                book.shelf = libraryBook ? libraryBook.shelf : 'none';
+                                return book;
+                            })
+                        });  
+                    }
                 } else {
                     this.setState({
                         books: []
